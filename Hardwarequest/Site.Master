@@ -1,0 +1,190 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Hardwarequest.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - HardwareQuest</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Quicksand:wght@500;700&display=swap" />
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Content/tactile-maker.css") %>" />
+
+</head>
+<body class="tm-theme">
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <nav class="navbar navbar-expand-xl navbar-dark hq-navbar">
+            <div class="container">
+                <a class="navbar-brand" runat="server" href="~/">HardwareQuest </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-xl-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Explore/InsideTheMachine">Inside the Machine</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Explore/Explorer">3D Explorer</a></li>
+                        <asp:PlaceHolder ID="phMember" runat="server" Visible="false">
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Learn</a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" runat="server" href="~/Hardware/List">Parts </a></li>
+                              <li><a class="dropdown-item" runat="server" href="~/Topics/List">Topics </a></li>
+                              <li><a class="dropdown-item" runat="server" href="~/Quiz/List">Quizzes </a></li>
+                              <li><a class="dropdown-item" runat="server" href="~/Forum/List">Forum </a></li>
+                            </ul>
+                          </li>
+                          <asp:PlaceHolder ID="phNavMyProgress" runat="server">
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Quiz/MyProgress">My Progress </a></li>
+                          </asp:PlaceHolder>
+                          <asp:PlaceHolder ID="phNavStudentProgress" runat="server" Visible="false">
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Quiz/StudentProgress">Student Progress </a></li>
+                          </asp:PlaceHolder>
+                        </asp:PlaceHolder>
+                        <asp:PlaceHolder ID="phStaff" runat="server" Visible="false">
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" runat="server" href="~/Manage/Default">My Content</a></li>
+                              <asp:PlaceHolder ID="phAdmin" runat="server" Visible="false">
+                                <li><a class="dropdown-item" runat="server" href="~/Admin/ManageUsers">Manage Users</a></li>
+                              </asp:PlaceHolder>
+                            </ul>
+                          </li>
+                        </asp:PlaceHolder>
+                    </ul>
+                    <ul class="navbar-nav align-items-xl-center">
+                        <asp:PlaceHolder ID="phAnon" runat="server" Visible="false">
+                          <li class="nav-item"><a class="nav-link" runat="server" href="~/Account/Login">Log in</a></li>
+                          <li class="nav-item"><a class="nav-link" runat="server" href="~/Account/Register">Sign up</a></li>
+                        </asp:PlaceHolder>
+                        <asp:PlaceHolder ID="phUser" runat="server" Visible="false">
+                          <li class="nav-item"><asp:HyperLink ID="lnkHello" runat="server" CssClass="nav-link" NavigateUrl="~/Account/Profile" ToolTip="My profile" /></li>
+                          <li class="nav-item"><a class="nav-link" runat="server" href="~/Account/Logout">Log out</a></li>
+                        </asp:PlaceHolder>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container body-content">
+            <asp:PlaceHolder ID="phBack" runat="server">
+              <p class="mb-3"><asp:HyperLink ID="lnkBack" runat="server" CssClass="btn btn-sm btn-outline-secondary" Text="&larr; Back" /></p>
+            </asp:PlaceHolder>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> HardwareQuest</p>
+            </footer>
+        </div>
+
+        <%-- Custom confirmation popup (replaces the browser confirm dialog) --%>
+        <div id="hqConfirmOverlay" class="hq-confirm-overlay" style="display:none;">
+            <div class="hq-confirm-box" role="dialog" aria-modal="true" aria-labelledby="hqConfirmMsg">
+                <p id="hqConfirmMsg" class="hq-confirm-msg"></p>
+                <div class="hq-confirm-actions">
+                    <button type="button" id="hqConfirmNo" class="btn btn-sm btn-outline-secondary">Cancel</button>
+                    <button type="button" id="hqConfirmYes" class="btn btn-sm hq-btn">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Scripts/popper.min.js") %>
+        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+    </asp:PlaceHolder>
+    <script>
+        (function () {
+            var overlay, msgEl, yesBtn, noBtn, pending = null, lastFocus = null;
+            function wire() {
+                overlay = document.getElementById('hqConfirmOverlay');
+                msgEl = document.getElementById('hqConfirmMsg');
+                yesBtn = document.getElementById('hqConfirmYes');
+                noBtn = document.getElementById('hqConfirmNo');
+                if (!overlay) return false;
+                yesBtn.addEventListener('click', function () {
+                    var cb = pending; hide(); if (cb) cb();
+                });
+                noBtn.addEventListener('click', hide);
+                overlay.addEventListener('click', function (e) { if (e.target === overlay) hide(); });
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && overlay.style.display !== 'none') hide();
+                });
+                return true;
+            }
+            function show(msg, cb) {
+                if (!overlay && !wire()) { if (window.confirm(msg)) cb(); return; }
+                lastFocus = document.activeElement;
+                msgEl.textContent = msg;
+                pending = cb;
+                overlay.style.display = 'flex';
+                yesBtn.focus();
+            }
+            function hide() {
+                pending = null;
+                if (overlay) overlay.style.display = 'none';
+                if (lastFocus && lastFocus.focus) lastFocus.focus();
+            }
+            // Gate a Web Forms submit button's postback behind the custom dialog.
+            window.hqConfirm = function (el, msg) {
+                if (el.getAttribute('data-hq-ok') === '1') {
+                    el.removeAttribute('data-hq-ok');
+                    return true; // user already confirmed -> allow postback
+                }
+                show(msg, function () {
+                    el.setAttribute('data-hq-ok', '1');
+                    el.click(); // re-trigger; this pass returns true and submits
+                });
+                return false; // block the original click
+            };
+
+            // Live preview for image pickers: any file input carrying
+            // data-preview="<img id>" shows the chosen picture in that <img>.
+            document.addEventListener('change', function (e) {
+                var input = e.target;
+                if (!input.getAttribute || !input.getAttribute('data-preview')) return;
+                var img = document.getElementById(input.getAttribute('data-preview'));
+                if (!img) return;
+                var file = input.files && input.files[0];
+                if (file && file.type.indexOf('image/') === 0) {
+                    var reader = new FileReader();
+                    reader.onload = function () { img.src = reader.result; img.style.display = 'inline-block'; };
+                    reader.readAsDataURL(file);
+                } else {
+                    img.removeAttribute('src');
+                    img.style.display = 'none';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

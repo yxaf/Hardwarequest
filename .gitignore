@@ -1,0 +1,17 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
+*.user
+
+# NuGet
+packages/
+
+# SQL Server LocalDB database files (regenerated from App_Data/schema.sql)
+*.mdf
+*.ldf
+
+# ASP.NET temporary compilation output
+_program files_git/
